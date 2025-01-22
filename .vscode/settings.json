@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "miaw.sln"
+    "dotnet.defaultSolution": "Unity_TopDown2D_Ujikom.sln"
 }
