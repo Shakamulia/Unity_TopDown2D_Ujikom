@@ -137,6 +137,9 @@ GameObject:
   m_Component:
   - component: {fileID: 480135892}
   - component: {fileID: 480135893}
+  - component: {fileID: 480135895}
+  - component: {fileID: 480135894}
+  - component: {fileID: 480135896}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -152,13 +155,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480135891}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00013739508, y: 0.0038178638, z: 0.90003854, w: 0.4357937}
-  m_LocalPosition: {x: 0.348, y: 0.904, z: -0.001}
+  m_LocalRotation: {x: -0, y: -0, z: 0.6582747, w: 0.7527778}
+  m_LocalPosition: {x: 0.7, y: 0.7, z: -0.004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 858965978}
-  m_LocalEulerAnglesHint: {x: -0.401, y: 0.176, z: 128.327}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 82.337}
 --- !u!212 &480135893
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -211,6 +214,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &480135894
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480135891}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1cc145313de0eb14c936d3fb8db6b9bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &480135895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480135891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3718285dc4fd8a54d8fbf46402ecbc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashAnimPrefab: {fileID: 1430113080469850709, guid: 9e9558ee5183c08458404aa134b38bb5, type: 3}
+  slashAnimSpawnPoint: {fileID: 1920162691}
+--- !u!210 &480135896
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480135891}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858965978}
+  - component: {fileID: 858965979}
   m_Layer: 0
   m_Name: Active Weapon
   m_TagString: Untagged
@@ -460,8 +511,21 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 480135892}
+  - {fileID: 1920162691}
   m_Father: {fileID: 1906554654}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &858965979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858965977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3f0e6f91faf0b4cadf03a2fedf741d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &862558095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4862289298456038929, guid: ad48b83902e684848934204821c03d1d, type: 3}
@@ -965,7 +1029,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
 --- !u!70 &1906554658
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1001,6 +1065,37 @@ CapsuleCollider2D:
   m_Offset: {x: -0.022828074, y: -0.24294788}
   m_Size: {x: 0.6988727, y: 0.38505626}
   m_Direction: 1
+--- !u!1 &1920162690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1920162691}
+  m_Layer: 0
+  m_Name: SplashSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1920162691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920162690}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.919, y: -0.075, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 858965978}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &518503333851922243
 PrefabInstance:
   m_ObjectHideFlags: 0

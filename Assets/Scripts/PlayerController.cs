@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
     [SerializeField] private float moveSpeed = 1f; // Kecepatan pergerakan pemain, dapat diset melalui inspector di Unity
 
     private PlayerControls playerControls; // Variabel untuk menyimpan referensi ke input kontrol pemain
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private Animator myAnimator; // Variabel untuk menyimpan referensi ke komponen Animator (untuk animasi)
     private SpriteRenderer mySpriteRender; // Variabel untuk menyimpan referensi ke komponen SpriteRenderer (untuk pengaturan sprite)
 
+    private bool facingLeft = true; // Flag untuk menentukan arah wajah pem
+    
     private void Awake() {
         // Fungsi ini dipanggil saat objek pertama kali diinisialisasi
         playerControls = new PlayerControls(); // Membuat instance dari PlayerControls untuk menangani input
@@ -60,8 +63,10 @@ public class PlayerController : MonoBehaviour
 
         if (mousePos.x < playerScreenPoint.x) {
             mySpriteRender.flipX = true; // Jika posisi mouse di kiri pemain, flip sprite secara horizontal
+            FacingLeft = true; // Menetapkan nilai FacingLeft menjadi true
         } else {
             mySpriteRender.flipX = false; // Jika posisi mouse di kanan pemain, tidak ada flip
+            FacingLeft = false;
         }
     }
 }
