@@ -4,27 +4,33 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int startingHealth = 3;
+    [SerializeField] private int startingHealth = 3; // Jumlah HP awal musuh
 
-    private int CurrentHealth;
+    private int currentHealth; // HP saat ini
+    private KnockBack knockback; // Referensi ke skrip KnockBack
+
+    private void Awake()
+    {
+        knockback = GetComponent<KnockBack>(); // Mengambil komponen KnockBack
+    }
 
     private void Start()
     {
-        CurrentHealth = startingHealth;
+        currentHealth = startingHealth; // Set HP awal saat musuh muncul
     }
 
     public void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        Debug.Log(CurrentHealth);
-        DetectDeath();
+        currentHealth -= damage; // Mengurangi HP musuh
+        knockback.GetKnockedBack(PlayerController.Instance.transform, 15f); // Memberikan efek knockback
+        DetectDeath(); // Mengecek apakah musuh sudah mati
     }
 
     private void DetectDeath()
     {
-        if (CurrentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Menghapus musuh dari game jika HP habis
         }
     }
 }

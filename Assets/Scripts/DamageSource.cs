@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class DamageSource : MonoBehaviour
 {
-    [SerializeField] private int damageAmount  = 1;
+    [SerializeField] private int damageAmount = 1; // Besar damage yang diberikan
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<EnemyHealth>())
+        // Mengecek apakah objek yang terkena adalah musuh yang memiliki EnemyHealth
+        EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+
+        if (enemyHealth != null)
         {
-            EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-            enemyHealth.TakeDamage(damageAmount);
-        };
+            enemyHealth.TakeDamage(damageAmount); // Memberikan damage ke musuh
+        }
     }
 }

@@ -1,28 +1,34 @@
-using System.Collections; // Mengimpor pustaka untuk menggunakan koleksi dan IEnumerator (untuk coroutine)
-using System.Collections.Generic; // Mengimpor pustaka untuk koleksi generik
-using UnityEngine; // Mengimpor pustaka Unity yang digunakan dalam pengembangan game
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class EnemyPathfinding : MonoBehaviour // Mendeklarasikan kelas EnemyPathfinding yang mewarisi MonoBehaviour
+public class EnemyPathfinding : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2f; // Kecepatan gerakan musuh, dapat diset melalui inspector di Unity
+    [SerializeField] private float moveSpeed = 2f; // Kecepatan gerak musuh
 
-    private Rigidbody2D rb; // Variabel untuk menyimpan referensi ke komponen Rigidbody2D (digunakan untuk pergerakan fisika)
-    private Vector2 moveDir; // Variabel untuk menyimpan arah pergerakan musuh (target posisi)
+    private Rigidbody2D rb;
+    private Vector2 moveDir;
+    private KnockBack knockback;
 
-    private void Awake() {
-        // Fungsi ini dipanggil saat objek pertama kali diinisialisasi
-        rb = GetComponent<Rigidbody2D>(); // Mengambil referensi ke komponen Rigidbody2D pada objek ini
+    private void Awake()
+    {
+        // Mengambil referensi ke Rigidbody2D dan komponen KnockBack
+        rb = GetComponent<Rigidbody2D>();
+        knockback = GetComponent<KnockBack>();
     }
 
-    private void FixedUpdate() {
-        // Fungsi ini dipanggil secara teratur pada interval tetap (lebih tepat untuk manipulasi fisika)
-        rb.MovePosition(rb.position + moveDir * (moveSpeed * Time.fixedDeltaTime)); 
-        // Menggerakkan posisi Rigidbody2D dengan kecepatan yang disesuaikan dengan waktu fixedDeltaTime
+    private void FixedUpdate()
+    {
+        // Jika sedang terkena knockback, hentikan eksekusi fungsi
+        if (knockback.gettingKnockedBack) return;
+
+        // Memindahkan musuh ke arah moveDir dengan kecepatan tertentu
+        rb.MovePosition(rb.position + moveDir * (moveSpeed * Time.fixedDeltaTime));
     }
 
-    public void MoveTo(Vector2 targetPosition) {
-        // Fungsi ini dipanggil untuk mengatur tujuan gerakan musuh
-        moveDir = (targetPosition - rb.position).normalized; 
-        // Menghitung arah gerakan dari posisi saat ini ke targetPosition, lalu menormalisasi vektor untuk memastikan gerakan konsisten
+    public void MoveTo(Vector2 targetPosition)
+    {
+        // Menghitung arah menuju target dan menyimpannya dalam moveDir
+        moveDir = (targetPosition - rb.position).normalized;
     }
 }
