@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int startingHealth = 3; // Jumlah HP awal musuh
     [SerializeField] private GameObject deathVFXPrefab;
+    [SerializeField] private float knockBackThrush = 15f;
 
     private int currentHealth; // HP saat ini
     private KnockBack knockback; // Referensi ke skrip KnockBack
@@ -25,8 +26,15 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage; // Mengurangi HP musuh
-        knockback.GetKnockedBack(PlayerController.Instance.transform, 15f); // Memberikan efek knockback
+        knockback.GetKnockedBack(PlayerController.Instance.transform, knockBackThrush); // Memberikan efek knockback
         StartCoroutine(flash.FlashRoutine());
+        StartCoroutine(CheckDetectDeathRoutine());
+    }
+
+    private IEnumerator CheckDetectDeathRoutine()
+    {
+        yield return new WaitForSeconds(flash.GetRestoreMatTime());
+        DetectDeath();
     }
 
     public void DetectDeath()

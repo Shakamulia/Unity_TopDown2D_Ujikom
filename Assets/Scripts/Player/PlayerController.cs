@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController Instance { get; private set; } // Singleton instance
-    public bool FacingLeft { get; private set; } // Menyimpan arah menghadap karakter
+    public bool FacingLeft { get { return facingLeft; } }
+    public static PlayerController Instance;
 
     [SerializeField] private float moveSpeed = 1f; // Kecepatan gerak pemain
+    [SerializeField] private float dashSpeed = 4f;
+    [SerializeField] private TrailRenderer myTrailRenderer;
 
     private PlayerControls playerControls;
     private Vector2 movement;
     private Rigidbody2D rb;
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer mySpriteRender;
+    private float startingMoveSpeed;
+
+    private bool facingLeft = false;
+    private bool isDashing = false;
 
     private void Awake()
     {
@@ -22,7 +28,14 @@ public class PlayerController : MonoBehaviour
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        mySpriteRender = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        playerControls.Combat.Dash.performed += _ => Dash();
+
+        startingMoveSpeed = moveSpeed;
     }
 
     private void OnEnable() => playerControls.Enable(); // Mengaktifkan input kontrol
@@ -31,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        AdjustFacingDirection(); // Menyesuaikan arah karakter
+        AdjustPlayerFacingDirection(); // Menyesuaikan arah karakter
         Move(); // Memindahkan karakter
     }
 
@@ -49,14 +62,42 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
-    private void AdjustFacingDirection()
+    private void AdjustPlayerFacingDirection()
     {
-        // Menyesuaikan arah karakter berdasarkan posisi mouse
         Vector3 mousePos = Input.mousePosition;
         Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        bool isFacingLeft = mousePos.x < playerScreenPoint.x;
 
-        spriteRenderer.flipX = isFacingLeft;
-        FacingLeft = isFacingLeft;
+        if (mousePos.x < playerScreenPoint.x)
+        {
+            mySpriteRender.flipX = true;
+            facingLeft = true;
+        }
+        else
+        {
+            mySpriteRender.flipX = false;
+            facingLeft = false;
+        }
+    }
+
+    private void Dash()
+    {
+        if (!isDashing)
+        {
+            isDashing = true;
+            moveSpeed *= dashSpeed;
+            myTrailRenderer.emitting = true;
+            StartCoroutine(EndDashRoutine());
+        }
+    }
+
+    private IEnumerator EndDashRoutine()
+    {
+        float dashTime = .2f;
+        float dashCD = .25f;
+        yield return new WaitForSeconds(dashTime);
+        moveSpeed = startingMoveSpeed;
+        myTrailRenderer.emitting = false;
+        yield return new WaitForSeconds(dashCD);
+        isDashing = false;
     }
 }

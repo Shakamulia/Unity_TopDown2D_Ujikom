@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KnockBack : MonoBehaviour
 {
-    public bool gettingKnockedBack { get; private set; } // Status apakah objek sedang terkena knockback
+    public bool gettingKnockedBack { get; private set; }
 
     [SerializeField] private float knockBackTime = .2f; // Durasi knockback
 

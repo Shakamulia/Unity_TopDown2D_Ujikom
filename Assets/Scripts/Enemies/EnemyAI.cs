@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour 
 {
+    [SerializeField] private float roamChangeDirFloat = 2f;
+
     private enum State { // Enum untuk menyimpan status AI musuh
         Roaming // Status roaming, berarti musuh sedang menjelajah
     }
@@ -27,7 +29,7 @@ public class EnemyAI : MonoBehaviour
         while (state == State.Roaming) { // Selama status musuh adalah Roaming
             Vector2 roamPosition = GetRoamingPosition(); // Mendapatkan posisi acak untuk musuh bergerak
             enemyPathfinding.MoveTo(roamPosition); // Meminta musuh bergerak ke posisi yang telah dihitung
-            yield return new WaitForSeconds(2f); // Menunggu selama 2 detik sebelum melanjutkan perulangan
+            yield return new WaitForSeconds(roamChangeDirFloat);
         }
     }
 
