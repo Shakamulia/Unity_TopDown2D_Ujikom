@@ -8,9 +8,11 @@ public class EnemyHealth : MonoBehaviour
 
     private int currentHealth; // HP saat ini
     private KnockBack knockback; // Referensi ke skrip KnockBack
+    private Flash flash;
 
     private void Awake()
     {
+        flash = GetComponent<Flash>();
         knockback = GetComponent<KnockBack>(); // Mengambil komponen KnockBack
     }
 
@@ -23,10 +25,10 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage; // Mengurangi HP musuh
         knockback.GetKnockedBack(PlayerController.Instance.transform, 15f); // Memberikan efek knockback
-        DetectDeath(); // Mengecek apakah musuh sudah mati
+        StartCoroutine(flash.FlashRoutine());
     }
 
-    private void DetectDeath()
+    public void DetectDeath()
     {
         if (currentHealth <= 0)
         {
