@@ -7,11 +7,13 @@ public class Sword : MonoBehaviour
     [SerializeField] private GameObject slashAnimPrefab; // Prefab animasi serangan
     [SerializeField] private Transform slashAnimSpawnPoint; // Titik spawn animasi
     [SerializeField] private Transform weaponCollider; // Collider senjata
+    [SerializeField] private float swordAttackCD = .5f;
 
     private PlayerControls playerControls; // Input kontrol dari player
     private Animator myAnimator; // Animator untuk animasi senjata
     private PlayerController playerController; // Kontroler player
     private ActiveWeapon activeWeapon; // Referensi ke senjata aktif
+    private bool attackButtonDown, isAttacking = false;
 
     private GameObject slashAnim; // Objek animasi serangan yang sedang berlangsung
 
@@ -26,20 +28,47 @@ public class Sword : MonoBehaviour
 
     private void OnEnable() => playerControls.Enable(); // Mengaktifkan input kontrol saat senjata diaktifkan
 
-    private void Start() => playerControls.Combat.Attack.started += _ => Attack(); // Mendaftarkan event untuk tombol serangan
+    void Start()
+    {
+        playerControls.Combat.Attack.started += _ => StartAttacking();
+        playerControls.Combat.Attack.canceled += _ => StopAttacking();
+    } // Mendaftarkan event untuk tombol serangan
 
-    private void Update() => MouseFollowWithOffset(); // Memperbarui rotasi senjata mengikuti posisi mouse setiap frame
+    private void Update() {
+        MouseFollowWithOffset();
+        Attack();
+    } // Memperbarui rotasi senjata mengikuti posisi mouse setiap frame
+
+    private void StartAttacking()
+    {
+        attackButtonDown = true;
+    }
+
+    private void StopAttacking()
+    {
+        attackButtonDown = false;
+    }
 
     private void Attack()
     {
-        // Memicu animasi serangan dan mengaktifkan collider senjata untuk deteksi tabrakan
-        myAnimator.SetTrigger("Attack");
-        weaponCollider.gameObject.SetActive(true);
-
-        // Menambahkan animasi serangan pada titik spawn
-        slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
-        slashAnim.transform.parent = this.transform.parent; // Memastikan animasi mengikuti player
+        if (attackButtonDown && !isAttacking)
+        {
+            isAttacking = true;
+            myAnimator.SetTrigger("Attack");
+            weaponCollider.gameObject.SetActive(true);
+            slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
+            slashAnim.transform.parent = this.transform.parent;
+            StartCoroutine(AttackCDRoutine());
+        }
     }
+
+    private IEnumerator AttackCDRoutine()
+    {
+        yield return new WaitForSeconds(swordAttackCD);
+        isAttacking = false;
+    }
+
+
 
     public void DoneAttackingAnimEvent() => weaponCollider.gameObject.SetActive(false); // Menonaktifkan collider setelah serangan selesai
 
