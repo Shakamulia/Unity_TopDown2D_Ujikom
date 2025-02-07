@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int startingHealth = 3; // Jumlah HP awal musuh
+    [SerializeField] private GameObject deathVFXPrefab;
 
     private int currentHealth; // HP saat ini
     private KnockBack knockback; // Referensi ke skrip KnockBack
@@ -32,6 +33,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject); // Menghapus musuh dari game jika HP habis
         }
     }
