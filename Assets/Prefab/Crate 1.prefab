@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6299506382968826871}
   - component: {fileID: 3054656637584030112}
   m_Layer: 0
-  m_Name: Bush
+  m_Name: Crate 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1064086211577322219}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.79, y: 0, z: 0}
+  m_LocalPosition: {x: -1.996, y: 0.007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bfef07146d6b4d2429d2dfe35bece613, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ebd3046f319213b4cb880b4133d0bab7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,8 +118,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0.010079727, y: -0.1382279}
+  m_Size: {x: 1.446756, y: 1.446756}
   m_Direction: 1
 --- !u!114 &3054656637584030112
 MonoBehaviour:
@@ -133,4 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d707b9464fb2d1449b7ad05c7f3f23f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyVFX: {fileID: 4055973758311581809, guid: 8f451cb2d0d67894182e71c416303c25, type: 3}
+  destroyVFX: {fileID: 4055973758311581809, guid: 62799532195a47f4a9986f689588d955, type: 3}
