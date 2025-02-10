@@ -8369,6 +8369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1048541400}
   - component: {fileID: 1048541401}
+  - component: {fileID: 1048541402}
   m_Layer: 5
   m_Name: Active Inventory
   m_TagString: Untagged
@@ -8424,6 +8425,18 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1048541402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048541399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b85de0aabaa1048b82d765da996964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1067198624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6275607530775735690, guid: 54f14f95e57fee84284f611adf3888a3, type: 3}
