@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour, IWeapon
 {
-    [SerializeField] private GameObject slashAnimPrefab; // Prefab animasi serangan
-    [SerializeField] private Transform slashAnimSpawnPoint; // Titik spawn animasi
-    [SerializeField] private Transform weaponCollider; // Collider senjata
+    [SerializeField] private GameObject slashAnimPrefab;
+    [SerializeField] private Transform slashAnimSpawnPoint;
+    [SerializeField] private Transform weaponCollider;
     [SerializeField] private float swordAttackCD = .5f;
 
-    private Animator myAnimator; // Animator untuk animasi senjata
-    private PlayerController playerController; // Kontroler player
-    private ActiveWeapon activeWeapon; // Referensi ke senjata aktif
+    private Animator myAnimator;
+    private PlayerController playerController;
+    private ActiveWeapon activeWeapon;
 
-    private GameObject slashAnim; // Objek animasi serangan yang sedang berlangsung
+    private GameObject slashAnim;
 
     private void Awake()
     {
-        // Menyiapkan referensi komponen seperti PlayerController, ActiveWeapon, Animator, dan PlayerControls
         playerController = GetComponentInParent<PlayerController>();
         activeWeapon = GetComponentInParent<ActiveWeapon>();
         myAnimator = GetComponent<Animator>();
     }
 
-    private void Update() {
+    private void Update()
+    {
         MouseFollowWithOffset();
-    } // Memperbarui rotasi senjata mengikuti posisi mouse setiap frame
+    }
 
     public void Attack()
     {
@@ -43,9 +43,11 @@ public class Sword : MonoBehaviour, IWeapon
         ActiveWeapon.Instance.ToggleIsAttacking(false);
     }
 
+    public void DoneAttackingAnimEvent()
+    {
+        weaponCollider.gameObject.SetActive(false);
+    }
 
-
-    public void DoneAttackingAnimEvent() => weaponCollider.gameObject.SetActive(false); // Menonaktifkan collider setelah serangan selesai
 
     public void SwingUpFlipAnimEvent()
     {
@@ -56,6 +58,7 @@ public class Sword : MonoBehaviour, IWeapon
             slashAnim.GetComponent<SpriteRenderer>().flipX = true;
         }
     }
+
     public void SwingDownFlipAnimEvent()
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
