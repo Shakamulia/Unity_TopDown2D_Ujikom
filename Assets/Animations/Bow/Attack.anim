@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.6, y: 0.1, z: 0}
+        value: {x: 0.66, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -28,8 +28,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.05
-        value: {x: 0.84, y: 0.09, z: 0}
+        time: 0.033333335
+        value: {x: 0.55, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -38,7 +38,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.083333336
-        value: {x: 0.6, y: 0.1, z: 0}
+        value: {x: 0.66, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -96,7 +96,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6
+        value: 0.66
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -104,8 +104,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.05
-        value: 0.84
+        time: 0.033333335
+        value: 0.55
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -114,7 +114,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: 0.6
+        value: 0.66
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -135,7 +135,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -143,8 +143,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.05
-        value: 0.09
+        time: 0.033333335
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -153,7 +153,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: 0.1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -182,7 +182,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.05
+        time: 0.033333335
         value: 0
         inSlope: 0
         outSlope: 0
@@ -212,14 +212,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.083333336
-    functionName: SpawnStaffProjectileAnimEvent
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.083333336
-    functionName: 
+    functionName: Attack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
