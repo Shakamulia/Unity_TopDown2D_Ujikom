@@ -7,14 +7,15 @@ public class PlayerController : Singleton<PlayerController>
     public bool FacingLeft { get { return facingLeft; } }
 
 
-    [SerializeField] private float moveSpeed = 1f; // Kecepatan gerak pemain
+    [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float dashSpeed = 4f;
     [SerializeField] private TrailRenderer myTrailRenderer;
+    [SerializeField] private Transform weaponCollider;
 
     private PlayerControls playerControls;
     private Vector2 movement;
     private Rigidbody2D rb;
-    private Animator animator;
+    private Animator myAnimator;
     private SpriteRenderer mySpriteRender;
     private float startingMoveSpeed;
 
@@ -27,7 +28,7 @@ public class PlayerController : Singleton<PlayerController>
 
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        myAnimator = GetComponent<Animator>();
         mySpriteRender = GetComponent<SpriteRenderer>();
     }
 
@@ -38,27 +39,37 @@ public class PlayerController : Singleton<PlayerController>
         startingMoveSpeed = moveSpeed;
     }
 
-    private void OnEnable() => playerControls.Enable(); // Mengaktifkan input kontrol
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
 
-    private void Update() => HandleInput(); // Menangani input pergerakan
+    private void Update()
+    {
+        PlayerInput();
+    }
 
     private void FixedUpdate()
     {
-        AdjustPlayerFacingDirection(); // Menyesuaikan arah karakter
-        Move(); // Memindahkan karakter
+        AdjustPlayerFacingDirection();
+        Move();
     }
 
-    private void HandleInput()
+    public Transform GetWeaponCollider()
     {
-        // Membaca input pergerakan dan mengatur parameter animasi
+        return weaponCollider;
+    }
+
+    private void PlayerInput()
+    {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
-        animator.SetFloat("moveX", movement.x);
-        animator.SetFloat("moveY", movement.y);
+
+        myAnimator.SetFloat("moveX", movement.x);
+        myAnimator.SetFloat("moveY", movement.y);
     }
 
     private void Move()
     {
-        // Menggerakkan karakter berdasarkan input
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
