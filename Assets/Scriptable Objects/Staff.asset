@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25acccfc47273cf4196857cd4177cb9d, type: 3}
   m_Name: Staff
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 0}
-  weaponCooldown: 0
+  weaponPrefab: {fileID: 8237138132608548082, guid: 17d43c0510ad8f84dabc71947a907c9d, type: 3}
+  weaponCooldown: 1.2
