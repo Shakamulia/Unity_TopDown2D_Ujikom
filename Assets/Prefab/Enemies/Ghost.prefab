@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 2565735544825723007}
   - component: {fileID: 4900217143098479071}
   - component: {fileID: 134914930726649326}
+  - component: {fileID: 3591828797006125937}
   - component: {fileID: 7249137730806271486}
   - component: {fileID: 3977109508566579139}
   m_Layer: 0
@@ -190,6 +191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roamChangeDirFloat: 2
+  attackRange: 5
+  enemyType: {fileID: 3591828797006125937}
+  attackCooldown: 2
+  stopMovingWhileAttacking: 1
 --- !u!114 &3493741746272993310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +262,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed7e7d24706b084b8077f3b276339d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3591828797006125937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8778024709213248327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f33466a28aa9c644b48d8e83b8353aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 4759262225634061637, guid: cf01af6d84314064dae09dfcd4ecf3a4, type: 3}
 --- !u!50 &7249137730806271486
 Rigidbody2D:
   serializedVersion: 4

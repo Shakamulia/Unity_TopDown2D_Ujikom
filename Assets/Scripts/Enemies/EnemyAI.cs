@@ -1,41 +1,112 @@
-using System.Collections; 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour 
+public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private float roamChangeDirFloat = 2f;
+    [SerializeField] private float attackRange = 5f;
+    [SerializeField] private MonoBehaviour enemyType;
+    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private bool stopMovingWhileAttacking = false;
 
-    private enum State { // Enum untuk menyimpan status AI musuh
-        Roaming // Status roaming, berarti musuh sedang menjelajah
+    private bool canAttack = true;
+
+    private enum State
+    {
+        Roaming,
+        Attacking
     }
 
-    private State state; // Variabel untuk menyimpan status terkini musuh
-    private EnemyPathfinding enemyPathfinding; // Variabel untuk menyimpan referensi ke komponen EnemyPathfinding
+    private Vector2 roamPosition;
+    private float timeRoaming = 0f;
 
-    private void Awake() {
-        // Fungsi ini dipanggil sebelum fungsi Start() dan digunakan untuk inisialisasi
-        enemyPathfinding = GetComponent<EnemyPathfinding>(); // Mengambil referensi komponen EnemyPathfinding yang terpasang pada objek
-        state = State.Roaming; // Menginisialisasi status musuh menjadi Roaming
+    private State state;
+    private EnemyPathfinding enemyPathfinding;
+
+    private void Awake()
+    {
+        enemyPathfinding = GetComponent<EnemyPathfinding>();
+        state = State.Roaming;
     }
 
-    private void Start() {
-        // Fungsi ini dipanggil setelah Awake() dan digunakan untuk memulai logika permainan
-        StartCoroutine(RoamingRoutine()); // Memulai coroutine untuk perulangan roaming musuh
+    private void Start()
+    {
+        roamPosition = GetRoamingPosition();
     }
 
-    private IEnumerator RoamingRoutine() {
-        // Coroutine untuk mengatur musuh bergerak secara acak selama statusnya Roaming
-        while (state == State.Roaming) { // Selama status musuh adalah Roaming
-            Vector2 roamPosition = GetRoamingPosition(); // Mendapatkan posisi acak untuk musuh bergerak
-            enemyPathfinding.MoveTo(roamPosition); // Meminta musuh bergerak ke posisi yang telah dihitung
-            yield return new WaitForSeconds(roamChangeDirFloat);
+    private void Update()
+    {
+        MovementStateControl();
+    }
+
+    private void MovementStateControl()
+    {
+        switch (state)
+        {
+            default:
+            case State.Roaming:
+                Roaming();
+                break;
+
+            case State.Attacking:
+                Attacking();
+                break;
         }
     }
 
-    private Vector2 GetRoamingPosition() {
-        // Fungsi untuk menghasilkan posisi acak di sekitar area
-        return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized; 
-        // Menghasilkan vektor acak antara -1 dan 1 untuk X dan Y, kemudian dinormalisasi untuk menghasilkan arah acak dengan panjang tetap
+    private void Roaming()
+    {
+        timeRoaming += Time.deltaTime;
+
+        enemyPathfinding.MoveTo(roamPosition);
+
+        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+        {
+            state = State.Attacking;
+        }
+
+        if (timeRoaming > roamChangeDirFloat)
+        {
+            roamPosition = GetRoamingPosition();
+        }
+    }
+
+    private void Attacking()
+    {
+        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
+        {
+            state = State.Roaming;
+        }
+
+        if (attackRange != 0 && canAttack)
+        {
+
+            canAttack = false;
+            (enemyType as IEnemy).Attack();
+
+            if (stopMovingWhileAttacking)
+            {
+                enemyPathfinding.StopMoving();
+            }
+            else
+            {
+                enemyPathfinding.MoveTo(roamPosition);
+            }
+
+            StartCoroutine(AttackCooldownRoutine());
+        }
+    }
+
+    private IEnumerator AttackCooldownRoutine()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
+
+    private Vector2 GetRoamingPosition()
+    {
+        timeRoaming = 0f;
+        return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }
 }

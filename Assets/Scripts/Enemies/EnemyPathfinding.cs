@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyPathfinding : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2f; // Kecepatan gerak musuh
+    [SerializeField] private float moveSpeed = 2f;
 
     private Rigidbody2D rb;
     private Vector2 moveDir;
@@ -36,7 +36,11 @@ public class EnemyPathfinding : MonoBehaviour
 
     public void MoveTo(Vector2 targetPosition)
     {
-        // Menghitung arah menuju target dan menyimpannya dalam moveDir
         moveDir = targetPosition;
+    }
+
+    public void StopMoving()
+    {
+        moveDir = Vector3.zero;
     }
 }
