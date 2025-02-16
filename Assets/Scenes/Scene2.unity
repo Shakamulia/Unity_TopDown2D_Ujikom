@@ -4126,7 +4126,7 @@ PrefabInstance:
       objectReference: {fileID: 1604057598}
     - target: {fileID: 491544569993388173, guid: f8257d475336b7843902f64762906b94, type: 3}
       propertyPath: m_ChildCameras.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6027505184834181204, guid: f8257d475336b7843902f64762906b94, type: 3}
       propertyPath: m_LocalPosition.x
