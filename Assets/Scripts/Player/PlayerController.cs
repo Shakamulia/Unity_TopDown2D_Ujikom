@@ -72,7 +72,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Move()
     {
-        if (knockback.gettingKnockedBack) { return; }
+        if (knockback.GettingKnockedBack) { return; }
 
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
@@ -96,8 +96,9 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Dash()
     {
-        if (!isDashing)
+        if (!isDashing && Stamina.Instance.CurrentStamina > 0)
         {
+            Stamina.Instance.UseStamina();
             isDashing = true;
             moveSpeed *= dashSpeed;
             myTrailRenderer.emitting = true;
