@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 4900217143098479071}
   - component: {fileID: 134914930726649326}
   - component: {fileID: 3591828797006125937}
+  - component: {fileID: 93773398619686408}
   - component: {fileID: 7249137730806271486}
   - component: {fileID: 3977109508566579139}
   - component: {fileID: 7506674249289199867}
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 3
   deathVFXPrefab: {fileID: 5460989870780553130, guid: 75386dcd8c13f464b986279d6a4a0850, type: 3}
-  knockBackThrush: 15
+  knockBackThrust: 15
 --- !u!114 &2565735544825723007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +286,21 @@ MonoBehaviour:
   restTime: 0.1
   stagger: 1
   oscillate: 1
+--- !u!114 &93773398619686408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8778024709213248327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1497464ba49fc4bb50a4011c1096b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldCoin: {fileID: 8456619293549511640, guid: e2a369edede3a824c9022be0bb2c675c, type: 3}
+  healthGlobe: {fileID: 8456619293549511640, guid: 11a84c755d0df24489b0075881aa387f, type: 3}
+  staminaGlobe: {fileID: 8456619293549511640, guid: 8db5b19660246b84491b8855361106ba, type: 3}
 --- !u!50 &7249137730806271486
 Rigidbody2D:
   serializedVersion: 4

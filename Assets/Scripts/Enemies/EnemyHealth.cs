@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int startingHealth = 3; // Jumlah HP awal musuh
+    [SerializeField] private int startingHealth = 3;
     [SerializeField] private GameObject deathVFXPrefab;
-    [SerializeField] private float knockBackThrush = 15f;
+    [SerializeField] private float knockBackThrust = 15f;
 
-    private int currentHealth; // HP saat ini
-    private KnockBack knockback; // Referensi ke skrip KnockBack
+    private int currentHealth;
+    private KnockBack knockback;
     private Flash flash;
 
     private void Awake()
     {
         flash = GetComponent<Flash>();
-        knockback = GetComponent<KnockBack>(); // Mengambil komponen KnockBack
+        knockback = GetComponent<KnockBack>();
     }
 
     private void Start()
     {
-        currentHealth = startingHealth; // Set HP awal saat musuh muncul
+        currentHealth = startingHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage; // Mengurangi HP musuh
-        knockback.GetKnockedBack(PlayerController.Instance.transform, knockBackThrush); // Memberikan efek knockback
+        currentHealth -= damage;
+        knockback.GetKnockedBack(PlayerController.Instance.transform, knockBackThrust);
         StartCoroutine(flash.FlashRoutine());
         StartCoroutine(CheckDetectDeathRoutine());
     }
@@ -42,7 +42,8 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject); // Menghapus musuh dari game jika HP habis
+            GetComponent<PickUpSpawner>().DropItems();
+            Destroy(gameObject);
         }
     }
 }
