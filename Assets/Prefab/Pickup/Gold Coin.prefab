@@ -121,9 +121,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f443072150443d048bd656c36a78a244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpType: 0
   pickUpDistance: 5
   accelartionRate: 0.5
   moveSpeed: 2
+  animCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  heightY: 1.5
+  popDuration: 1
 --- !u!70 &3389943191009860438
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +162,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.00396204, y: -0.003962159}
